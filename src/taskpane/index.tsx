@@ -1,28 +1,21 @@
-import App from "./components/App";
+import App from "/App";
 import { AppContainer } from "react-hot-loader";
-import { initializeIcons } from "@fluentui/font-icons-mdl2";
-import { ThemeProvider } from "@fluentui/react";
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-
-/* global document, Office, module, require */
-
-initializeIcons();
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { HookRouter as Router } from "react-router-dom";
 
 let isOfficeInitialized = false;
 
 const title = "Contoso Task Pane Add-in";
+const root = ReactDOM.createRoot(document.getElementById("container"));
 
-const render = (Component) => {
-  ReactDOM.render(
-    <AppContainer>
-      <ThemeProvider>
-        <Component title={title} isOfficeInitialized={isOfficeInitialized} />
-      </ThemeProvider>
-    </AppContainer>,
-    document.getElementById("container")
-  );
-};
+root.render(
+  <AppContainer>
+    <Router>
+      <Component title={title} isOfficeInitialized={isOfficeInitialized} />
+    </Router>
+  </AppContainer>
+);
 
 /* Render application after Office initializes */
 Office.onReady(() => {
